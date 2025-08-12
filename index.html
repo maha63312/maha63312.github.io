@@ -9,14 +9,14 @@ title: Forside
 <ul class="post-list">
   {% for post in site.posts %}
     <li>
-      <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+<a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}">{{ post.title }}</a>
       <p>
         <strong>Dato:</strong> {{ post.date | date: "%d-%m-%Y" }}
         {% if post.week %} &nbsp;|&nbsp; <strong>Uge:</strong> {{ post.week }}{% endif %}
         {% if post.elective %} &nbsp;|&nbsp; <strong>Valgfag:</strong> {{ post.elective }}{% endif %}
       </p>
       {% if post.goals %}<p><em>Mål:</em> {{ post.goals }}</p>{% endif %}
-      <a href="{{ post.url | relative_url }}">Læs mere →</a>
+<a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}">Læs mere →</a>
       <hr>
     </li>
   {% endfor %}
