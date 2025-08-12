@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ page.title }} | {{ site.title }}</title>
+
+  <!-- Brug Minima-styling hvis temaet er sat i _config.yml -->
+  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+  <style>
+    /* Enkel topmenu */
+    .topbar {
+      background: #333; padding: .6rem 1rem; text-align: center;
+    }
+    .topbar a {
+      color: #fff; text-decoration: none; font-weight: 600; margin: 0 .8rem;
+    }
+    .topbar a:hover { text-decoration: underline; }
+    main { max-width: 900px; margin: 0 auto; padding: 1rem; }
+    header { text-align: center; margin: 1rem 0 .5rem; }
+    footer { text-align: center; padding: 1rem; color: #666; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>{{ site.title }}</h1>
+  <p>{{ site.description }}</p>
+</header>
+
+<nav class="topbar">
+  <a href="{{ '/' | absolute_url }}">Forside</a>
+  <a href="{{ '/snippets' | absolute_url }}">Kode Snippets</a>
+  <a href="{{ '/projekter' | absolute_url }}">Projekter</a>
+</nav>
+
+<main>
+  {{ content }}
+</main>
+
+<footer>
+  &copy; {{ site.time | date: "%Y" }} — {{ site.title }}
+</footer>
+
+</body>
+</html>
