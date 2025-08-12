@@ -1,0 +1,55 @@
+---
+layout: default
+---
+
+<article class="post">
+  <h1>{{ page.title }}</h1>
+  <p>
+    <strong>Dato:</strong> {{ page.date | date: "%d-%m-%Y" }}
+    {% if page.week %} &nbsp;|&nbsp; <strong>Uge:</strong> {{ page.week }}{% endif %}
+  </p>
+
+  {% if page.elective %}
+    <h3>Kontekst</h3>
+    <p>{{ page.elective }}</p>
+  {% endif %}
+
+  {% if page.goals %}
+    <h3>Mål</h3>
+    <p>{{ page.goals }}</p>
+  {% endif %}
+
+  {% if page.process %}
+    <h3>Proces</h3>
+    <p>{{ page.process }}</p>
+  {% endif %}
+
+  {% if page.result %}
+    <h3>Resultat</h3>
+    <div>{{ page.result }}</div>
+  {% endif %}
+
+  {% if page.learning %}
+    <h3>Læring / refleksion</h3>
+    <p>{{ page.learning }}</p>
+  {% endif %}
+
+  {% if page.next_plan %}
+    <h3>Videre plan</h3>
+    <p>{{ page.next_plan }}</p>
+  {% endif %}
+
+  {% if page.resources and page.resources.size > 0 %}
+    <h3>Ressourcer</h3>
+    <ul>
+      {% for item in page.resources %}
+        <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</article>
+
+<style>
+.post h1 { margin-bottom: .2rem; }
+.post h3 { margin-top: 1.2rem; }
+</style>
