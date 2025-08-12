@@ -1,0 +1,5 @@
+title: Min Uddannelsesportefølje
+description: Daglige/ugentlige refleksioner
+theme: minima          # bruger GitHub Pages’ indbyggede tema
+timezone: Europe/Copenhagen
+markdown: kramdown
