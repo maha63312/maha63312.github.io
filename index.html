@@ -6,11 +6,24 @@ title: Forside
 <h1>{{ site.title }}</h1>
 <p>{{ site.description }}</p>
 
+<!-- 🔍 Filter og søgefelt -->
+<div id="filters" style="margin-bottom: 1.5rem;">
+  <label for="search">Søg:</label>
+  <input type="text" id="search" placeholder="Søg i titel og mål...">
+
+  <label for="subject" style="margin-left: 1rem;">Filtrer efter valgfag:</label>
+  <select id="subject">
+    <option value="">Alle</option>
+    <option value="Machine Learning og AI">Machine Learning og AI</option>
+    <option value="Backendudvikling og API-design">Backendudvikling og API-design</option>
+  </select>
+</div>
+
 <ul class="post-list">
-  {% for post in site.posts %}
-    <li>
-        <a href="{{ post.url | absolute_url }}">{{ post.title }}</a>
-      <p>
+  {% for post in paginator.posts %}
+        <li class="post-item" data-subject="{{ post.elective }}">
+        <h2><a href="{{ post.url | absolute_url }}">{{ post.title }}</a></h2>
+          <p>
         <strong>Dato:</strong> {{ post.date | date: "%d-%m-%Y" }}
         {% if post.week %} &nbsp;|&nbsp; <strong>Uge:</strong> {{ post.week }}{% endif %}
         {% if post.elective %} &nbsp;|&nbsp; <strong>Valgfag:</strong> {{ post.elective }}{% endif %}
@@ -22,7 +35,49 @@ title: Forside
   {% endfor %}
 </ul>
 
+<!-- 📄 Pagination navigation -->
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path }}">Forrige</a>
+  {% endif %}
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path }}">Næste</a>
+  {% endif %}
+</div>
+
 <style>
 .post-list { list-style: none; padding: 0; }
 hr { border: 0; border-top: 1px solid #eee; margin: 1rem 0; }
 </style>
+
+<!-- 🖥 JavaScript til søgning og filtrering -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const searchInput = document.getElementById("search");
+  const subjectSelect = document.getElementById("subject");
+  const posts = document.querySelectorAll(".post-item");
+
+  function filterPosts() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const selectedSubject = subjectSelect.value;
+
+    posts.forEach(post => {
+      const title = post.querySelector("h2").textContent.toLowerCase();
+      const goals = post.querySelector(".goals")?.textContent.toLowerCase() || "";
+      const subject = post.dataset.subject;
+
+      const matchesSearch = title.includes(searchTerm) || goals.includes(searchTerm);
+      const matchesSubject = !selectedSubject || subject === selectedSubject;
+
+      if (matchesSearch && matchesSubject) {
+        post.style.display = "";
+      } else {
+        post.style.display = "none";
+      }
+    });
+  }
+
+  searchInput.addEventListener("input", filterPosts);
+  subjectSelect.addEventListener("change", filterPosts);
+});
+</script>
