@@ -3,4 +3,7 @@ description: Daglige/ugentlige refleksioner
 theme: minima          # bruger GitHub Pages’ indbyggede tema
 timezone: Europe/Copenhagen
 future: true
+
+url: "https://maha63312.github.io"
+
 markdown: kramdown
