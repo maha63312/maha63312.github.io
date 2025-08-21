@@ -8,15 +8,24 @@
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
   <style>
     .topbar {
-      background: #333; padding: .6rem 1rem; text-align: center;
-    }
-    .topbar a {
-      color: #fff; text-decoration: none; font-weight: 600; margin: 0 .8rem;
-    }
-    .topbar a:hover { text-decoration: underline; }
-    main { max-width: 900px; margin: 0 auto; padding: 1rem; }
-    header { text-align: center; margin: 1rem 0 .5rem; }
-    footer { text-align: center; padding: 1rem; color: #666; }
+  position: sticky;   /* gør den "klæbende" */
+  top: 0;             /* hvor den skal stoppe */
+  z-index: 1000;      /* så den ligger over indhold */
+  background: #333;
+  padding: .6rem 1rem;
+  text-align: center;
+}
+
+.topbar a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 .8rem;
+}
+
+.topbar a:hover {
+  text-decoration: underline;
+}
   </style>
 </head>
 <body>
