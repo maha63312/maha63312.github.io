@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Projekter
+permalink: /projekter/
 ---
 
 # Projekter
