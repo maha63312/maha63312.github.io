@@ -7,25 +7,42 @@
 
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
   <style>
+    /* 🔝 Sticky topbar */
     .topbar {
-  position: sticky;   /* gør den "klæbende" */
-  top: 0;             /* hvor den skal stoppe */
-  z-index: 1000;      /* så den ligger over indhold */
-  background: #333;
-  padding: .6rem 1rem;
-  text-align: center;
-}
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #333;
+      padding: .6rem 1rem;
+      text-align: center; /* centrér links */
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .topbar a {
+      display: inline-block;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 .8rem;
+    }
+    .topbar a:hover {
+      text-decoration: underline;
+    }
 
-.topbar a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  margin: 0 .8rem;
-}
-
-.topbar a:hover {
-  text-decoration: underline;
-}
+    /* 📄 Indhold & struktur */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    header {
+      text-align: center;
+      margin: 1rem 0 .5rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #666;
+    }
   </style>
 </head>
 <body>
@@ -36,9 +53,9 @@
 </header>
 
 <nav class="topbar">
-  <a href="{{ '/' | absolute_url }}">Forside</a>
-  <a href="{{ '/snippets' | absolute_url }}">Kode Snippets</a>
-  <a href="{{ '/projekter' | absolute_url }}">Projekter</a>
+  <a href="{{ '/' | relative_url }}">Forside</a>
+  <a href="{{ '/snippets/' | relative_url }}">Kode Snippets</a>
+  <a href="{{ '/projekter/' | relative_url }}">Projekter</a>
 </nav>
 
 <main>
