@@ -14,25 +14,27 @@ layout: default
     <p>{{ page.elective }}</p>
   {% endif %}
 
-  {% if page.goals %}
-    <h3>Mål</h3>
-    <p>{{ page.goals }}</p>
-  {% endif %}
+{% if page.goals %}
+  <h3>Mål</h3>
+  <div class="markdown-body">{{ page.goals | markdownify }}</div>
+{% endif %}
 
-  {% if page.process %}
-    <h3>Proces</h3>
-    <p>{{ page.process }}</p>
-  {% endif %}
+{% if page.process %}
+  <h3>Proces</h3>
+  <div class="markdown-body">{{ page.process | markdownify }}</div>
+{% endif %}
 
-  {% if page.result %}
-    <h3>Resultat</h3>
-    <div>{{ page.result }}</div>
-  {% endif %}
+{% if page.result %}
+  <h3>Resultat</h3>
+  <div class="markdown-body">
+    {{ page.result | markdownify }}
+  </div>
+{% endif %}
 
-  {% if page.learning %}
-    <h3>Læring / refleksion</h3>
-    <p>{{ page.learning }}</p>
-  {% endif %}
+{% if page.learning %}
+  <h3>Læring / refleksion</h3>
+  <div class="markdown-body">{{ page.learning | markdownify }}</div>
+{% endif %}
 
   {% if page.next_plan %}
     <h3>Videre plan</h3>
