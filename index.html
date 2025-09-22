@@ -19,15 +19,28 @@ title: Forside
 
 <ul class="post-list">
   {% for post in paginator.posts %}
-        <li class="post-item" data-subject="{{ post.elective }}">
-        <h2><a href="{{ post.url | absolute_url }}">{{ post.title }}</a></h2>
-          <p>
+    {% assign electives = post.elective %}
+    {% if electives %}
+      {% if electives.first %}
+        {%- assign electives_display = electives | join: ', ' -%}
+        {%- assign electives_data    = electives | join: '|'  -%}
+      {% else %}
+        {%- assign electives_display = electives -%}
+        {%- assign electives_data    = electives -%}
+      {% endif %}
+    {% endif %}
+
+    <li class="post-item" data-subject="{{ electives_data | escape }}">
+      <h2><a href="{{ post.url | absolute_url }}">{{ post.title }}</a></h2>
+      <p>
         <strong>Dato:</strong> {{ post.date | date: "%d-%m-%Y" }}
         {% if post.week %} &nbsp;|&nbsp; <strong>Uge:</strong> {{ post.week }}{% endif %}
-        {% if post.elective %} &nbsp;|&nbsp; <strong>Valgfag:</strong> {{ post.elective }}{% endif %}
+        {% if electives_display %} &nbsp;|&nbsp; <strong>Valgfag:</strong> {{ electives_display }}{% endif %}
       </p>
-      {% if post.goals %}<p><em>Mål:</em> {{ post.goals }}</p>{% endif %}
-        <a href="{{ post.url | absolute_url }}">Læs mere →</a>
+      {% if post.goals %}
+        <p class="goals"><em>Mål:</em> {{ post.goals | markdownify | strip_html | truncate: 160 }}</p>
+      {% endif %}
+      <a href="{{ post.url | absolute_url }}">Læs mere →</a>
       <hr>
     </li>
   {% endfor %}
@@ -62,16 +75,12 @@ document.addEventListener("DOMContentLoaded", function() {
     posts.forEach(post => {
       const title = post.querySelector("h2").textContent.toLowerCase();
       const goals = post.querySelector(".goals")?.textContent.toLowerCase() || "";
-      const subject = post.dataset.subject;
+      const subjects = (post.dataset.subject || "").split("|");
 
-      const matchesSearch = title.includes(searchTerm) || goals.includes(searchTerm);
-      const matchesSubject = !selectedSubject || subject === selectedSubject;
+      const matchesSearch = !searchTerm || title.includes(searchTerm) || goals.includes(searchTerm);
+      const matchesSubject = !selectedSubject || subjects.includes(selectedSubject);
 
-      if (matchesSearch && matchesSubject) {
-        post.style.display = "";
-      } else {
-        post.style.display = "none";
-      }
+      post.style.display = (matchesSearch && matchesSubject) ? "" : "none";
     });
   }
 
