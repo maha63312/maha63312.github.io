@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const searchInput = document.getElementById("search");
   const subjectSelect = document.getElementById("subject");
   const posts = document.querySelectorAll(".post-item");
+  const pagination = document.querySelector(".pagination");
 
   // 🔄 Load saved filter state
   const savedSearch = localStorage.getItem("portfolioSearch") || "";
@@ -83,6 +84,8 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("portfolioSearch", searchTerm);
     localStorage.setItem("portfolioSubject", selectedSubject);
 
+    const hasFilter = !!searchTerm || !!selectedSubject;
+
     posts.forEach(post => {
       const title = post.querySelector("h2").textContent.toLowerCase();
       const goals = post.querySelector(".goals")?.textContent.toLowerCase() || "";
@@ -98,6 +101,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       post.style.display = (matchesSearch && matchesSubject) ? "" : "none";
     });
+
+    // 🔁 Skjul pagination når der er aktivt filter
+    if (pagination) {
+      pagination.style.display = hasFilter ? "none" : "";
+    }
   }
 
   // ▶ Apply filter on page load (needed for pagination)
