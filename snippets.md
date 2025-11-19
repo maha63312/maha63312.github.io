@@ -5,7 +5,7 @@ permalink: /snippets/
 ---
 
 <h1>Kode Snippets</h1>
-<p>Her samler jeg kodeeksempler og screenshots fra mit arbejde.</p>
+<p>Her samler jeg screenshots, tekniske eksperimenter, evalueringer af løsninger og refleksioner over mit arbejde.</p>
 
 <ul class="post-list">
 {% for post in site.categories.snippets %}
